@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Module file for servicestate module, which queries and displays the
+ * status of upstream services.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function servicestate_menu() {
+  $items = array();
+
+  return $items;
+}
