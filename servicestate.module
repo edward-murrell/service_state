@@ -11,5 +11,67 @@
 function servicestate_menu() {
   $items = array();
 
+  $items['servicestate'] = array(
+    'title'  => 'Service state',
+    'page callback'     => 'servicestate_view_page',
+    'access callback'   => TRUE,
+    #'access arguments'  => array('view service state page'),
+    'type'              => MENU_NORMAL_ITEM,
+    'file'              => 'servicestate.page.inc', // temporary
+  );
+
   return $items;
+}
+
+/*
+ * This is a set of dummy content used to test the display page and
+ * callback filters. It will eventually be deleted.
+ */
+function servicestate_dummy_services() {
+  $services = array();
+
+  $services['memcache'] = array(
+    'title'         => t('Memcache'),
+    'description'   => t('Checks the memcache daemon is up.'),
+    'callback'      => 'servicestate_dummy_check',
+    'arguments'     => array('error'),
+    'group'         => '',
+		'weight'        => 0,
+		'enabled'       => TRUE,
+  );
+
+  $services['smsos'] = array(
+    'title'         => t('SMS OS'),
+    'description'   => t('Checks the SMSOS service is active..'),
+    'callback'      => 'servicestate_dummy_check',
+    'arguments'     => array('ok'),
+    'group'         => '',
+		'weight'        => 0,
+		'enabled'       => TRUE,
+  );
+
+  return $services;
+}
+
+/*
+ * This is a set of dummy check used to test the display page and
+ * callback filters. It will eventually be deleted.
+ */
+function servicestate_dummy_check() {
+  $args  = func_get_args();
+  $nargs = func_num_args();
+  if ($nargs > 0) {
+    $state = array_pop($args);
+  } else {
+    $state = 'ok';
+  }
+  $result = array(
+    'status' => strtoupper($state),
+  );
+  
+  if ($result['status'] == 'OK') {
+    $result['message']  = 'Service returns as expected';    
+  } else {
+    $result['error']    = 'Service suffered an unknown error';    
+  }
 }
