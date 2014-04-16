@@ -19,6 +19,14 @@ function servicestate_menu() {
     'type'              => MENU_NORMAL_ITEM,
     'file'              => 'servicestate.page.inc', // temporary
   );
+  $items['servicestate/ajax/%'] = array(
+    'title'  => 'Service state',
+    'page callback'     => 'servicestate_view_page',
+    'access callback'   => TRUE,
+    #'access arguments'  => array('view service state page'),
+    'type'              => MENU_CALLBACK,
+    'file'              => 'servicestate.ajax.inc', // temporary
+  );
 
   return $items;
 }
