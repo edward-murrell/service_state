@@ -39,7 +39,7 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
     }
   }
   if (empty($variables['state'])) {
-    $variables['state'] = 'OK';
+    $variables['state'] = servicestate_query_callback($variables['service']);
   }
 
   if (!isset($variables['title'])) {

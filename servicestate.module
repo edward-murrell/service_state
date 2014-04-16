@@ -111,3 +111,11 @@ function servicestate_theme($existing, $type, $theme, $path) {
     )
   );
 }
+
+/*
+ * @param $id the machine name of the service.
+ * Format callback for querying service.
+ */
+function servicestate_query_callback($id) {
+  return 'OK';
+}
