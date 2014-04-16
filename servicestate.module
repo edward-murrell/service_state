@@ -91,7 +91,6 @@ function servicestate_theme($existing, $type, $theme, $path) {
   return array(
     'servicestate_view_table' => array(
       'template' => 'servicestate-view-table',
-      'render element' => 'element',
       'variables' => array(
         'elements' => array(),
       ),
@@ -100,10 +99,13 @@ function servicestate_theme($existing, $type, $theme, $path) {
     ),
     'servicestate_view_item' => array(
       'template' => 'servicestate-view-item',
-      'render element' => 'data',
       'variables' => array(
-        'title' => NULL,
-        'state' => NULL,
+        'service' => NULL,
+        'data'    => NULL,
+        'state'   => NULL,   // Pre rendered state
+        'method'  => 'html', // Render on demand, or use ajax?
+        'title'  => NULL,
+        'state'  => NULL,
       ),
       'file' => 'servicestate.theme.inc',
     )

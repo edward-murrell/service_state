@@ -27,7 +27,12 @@ function servicestate_view_page() {
 
   $services = servicestate_dummy_services();
   foreach ($services as $service => $data) {
-    $content['table']['#elements'][] = array('#theme' => 'servicestate_view_item', '#data' => $data);
+    $content['table']['#elements'][] = array(
+      '#theme' => 'servicestate_view_item',
+      '#service' => $service,
+      '#data'    => $data,
+      '#method'  => 'html',
+    );
   }
 
   return $content;
