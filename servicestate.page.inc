@@ -31,7 +31,7 @@ function servicestate_view_page() {
       '#theme' => 'servicestate_view_item',
       '#service' => $service,
       '#data'    => $data,
-      '#method'  => 'html',
+      '#method'  => 'ajax',
     );
   }
 

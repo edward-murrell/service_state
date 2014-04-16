@@ -27,22 +27,42 @@ function servicestate_preprocess_servicestate_view_table(&$variables) {
  *            upstream services may time out.
  */
 function servicestate_preprocess_servicestate_view_item(&$variables) {
-  // TODO: If ajax here, create a container and callback, and skip the rest
+  // TODO: Cache this.
+  $services = servicestate_dummy_services();
 
   // Fill out the data variable if empty
   if (empty($variables['data'])) {
-    $services = servicestate_dummy_services();
     if (!array_key_exists($variables['service'],$services)) {
       return ''; // TODO: Change this to a sane error.
     } else {
-      $variables['data'] = $services['data'];
+      $variables['data'] = $services[$variables['service']];
     }
-  }
-  if (empty($variables['state'])) {
-    $variables['state'] = servicestate_query_callback($variables['service']);
   }
 
   if (empty($variables['title'])) {
     $variables['title'] = $variables['data']['title'];
+  }
+
+  // If method is ajax
+  if ($variables['method'] == 'ajax' && array_key_exists($variables['service'],$services)) {
+    drupal_add_library('system', 'drupal.ajax');
+
+    // TODO change link to update to code that automatically calls ajax on load
+    $variables['title'] = t('This is a test.');
+    $variables['state'] =
+      l('Update',
+        "servicestate/nojs/{$variables['service']}",
+         array(
+          'attributes' => array(
+            'id' => 'servicestate-item-'.$variables['service'],
+            'class' => array('use-ajax'),
+        )
+      )
+    );
+    return;
+  }
+
+  if (empty($variables['state'])) {
+    $variables['state'] = servicestate_query_callback($variables['service']);
   }
 }

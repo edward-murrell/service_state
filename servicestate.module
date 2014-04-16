@@ -5,6 +5,8 @@
  * status of upstream services.
  */
 
+define ('SERVICESTATE_ID_PREFIX','servicestate-item');
+
 /**
  * Implements hook_menu().
  */
@@ -21,7 +23,8 @@ function servicestate_menu() {
   );
   $items['servicestate/ajax/%'] = array(
     'title'  => 'Service state',
-    'page callback'     => 'servicestate_view_page',
+    'page callback'     => 'servicestate_drupal_ajax',
+    'page arguments'    => array(2),
     'access callback'   => TRUE,
     #'access arguments'  => array('view service state page'),
     'type'              => MENU_CALLBACK,
