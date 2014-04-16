@@ -36,8 +36,8 @@ function servicestate_dummy_services() {
     'callback'      => 'servicestate_dummy_check',
     'arguments'     => array('error'),
     'group'         => '',
-		'weight'        => 0,
-		'enabled'       => TRUE,
+    'weight'        => 0,
+    'enabled'       => TRUE,
   );
 
   $services['smsos'] = array(
@@ -46,8 +46,8 @@ function servicestate_dummy_services() {
     'callback'      => 'servicestate_dummy_check',
     'arguments'     => array('ok'),
     'group'         => '',
-		'weight'        => 0,
-		'enabled'       => TRUE,
+    'weight'        => 0,
+    'enabled'       => TRUE,
   );
 
   return $services;
@@ -68,10 +68,36 @@ function servicestate_dummy_check() {
   $result = array(
     'status' => strtoupper($state),
   );
-  
+
   if ($result['status'] == 'OK') {
-    $result['message']  = 'Service returns as expected';    
+    $result['message'] = 'Service returns as expected';
   } else {
-    $result['error']    = 'Service suffered an unknown error';    
+    $result['error']   = 'Service suffered an unknown error';
   }
+}
+
+/*
+ * Implementation of hook_theme().
+ */
+function servicestate_theme($existing, $type, $theme, $path) {
+  return array(
+    'servicestate_view_table' => array(
+      'template' => 'servicestate-view-table',
+      'render element' => 'element',
+      'variables' => array(
+        'elements' => array(),
+      ),
+      'file' => 'servicestate.theme.inc',
+      #'pattern' =>
+    ),
+    'servicestate_view_item' => array(
+      'template' => 'servicestate-view-item',
+      'render element' => 'data',
+      'variables' => array(
+        'title' => NULL,
+        'state' => NULL,
+      ),
+      'file' => 'servicestate.theme.inc',
+    )
+  );
 }

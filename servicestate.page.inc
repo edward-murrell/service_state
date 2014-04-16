@@ -20,11 +20,15 @@ function servicestate_view_page() {
 
   $content['title'] = array('#type' => 'markup', '#markup' => 'This is dummy content');
 
+  $content['table'] = array(
+    '#theme' => 'servicestate_view_table',
+    '#elements' => array(),
+  );
+
   $services = servicestate_dummy_services();
   foreach ($services as $service => $data) {
-    $content[$service] = array('#type' => 'markup', '#markup' => "<h2>{$data['title']}</h2>");
-    
-    // Create template here.    
+    $content['table']['#elements'][] = array('#theme' => 'servicestate_view_item', '#data' => $data);
   }
+
   return $content;
 }
