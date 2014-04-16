@@ -42,7 +42,7 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
     $variables['state'] = servicestate_query_callback($variables['service']);
   }
 
-  if (!isset($variables['title'])) {
+  if (empty($variables['title'])) {
     $variables['title'] = $variables['data']['title'];
   }
 }
