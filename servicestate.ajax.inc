@@ -35,3 +35,25 @@ function servicestate_drupal_ajax($id) {
   print ajax_render($commands);
   exit();  
 }
+
+
+
+/*
+ * Render the status callback as a raw json url.
+ * @param $id the machine name of the service.
+ */
+function servicestate_json_ajax($id) {
+  $services = servicestate_get_services();
+  if (!array_key_exists($id,$services)) {
+    $state = array(
+      'state' => SERVICESTATE_NO_SUCH_SERVICE,
+      'error'  => 'This service does not exist',
+    );
+  } else {
+    $srv  = $services[$id];
+    $state = servicestate_query_callback($id);
+  }
+
+  print drupal_json_output($state);
+  exit();
+}

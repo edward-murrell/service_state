@@ -15,4 +15,7 @@
   <td class="servicestate-table-update">
     <?php print $button; ?>
   </td>
+  <td class="servicestate-table-json-link">
+    <?php print $json_link; ?>
+  </td>
 </tr>

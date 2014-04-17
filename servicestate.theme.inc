@@ -64,4 +64,5 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
   }
 
   $variables['classes_array'][] = ''.strtolower($variables['state']['status']);
+  $variables['json_link'] = l('JSON',"servicestate/json/{$variables['service']}");
 }

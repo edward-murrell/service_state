@@ -5,6 +5,7 @@
       <th class="servicestate-table-state">Service</th>
       <th class="servicestate-table-state">State</th>
       <th class="servicestate-table-update"></th>
+      <th class="servicestate-table-JSON">API</th>
     </tr>
   </thead>
   <tbody><?php print $children; ?></tbody>

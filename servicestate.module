@@ -37,6 +37,15 @@ function servicestate_menu() {
     'type'              => MENU_CALLBACK,
     'file'              => 'servicestate.ajax.inc', // temporary
   );
+  $items['servicestate/json/%'] = array(
+    'title'  => 'Service state',
+    'page callback'     => 'servicestate_json_ajax',
+    'page arguments'    => array(2),
+    'access callback'   => TRUE,
+    #'access arguments'  => array('view service state page'),
+    'type'              => MENU_CALLBACK,
+    'file'              => 'servicestate.ajax.inc', // temporary
+  );
 
   return $items;
 }
@@ -88,6 +97,7 @@ function servicestate_theme($existing, $type, $theme, $path) {
         'state'   => NULL,   // Pre rendered state
         'method'  => 'html', // Render on demand, or use ajax?
         'button'  => NULL,
+        'json_link'  => NULL,
       ),
       'file' => 'servicestate.theme.inc',
     )
