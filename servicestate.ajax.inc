@@ -18,7 +18,7 @@ function servicestate_drupal_ajax($id) {
   }
   $vars = array(
     'title' => $srv['title'],
-    'state' => 'OK',
+    'state' => SERVICESTATE_OK,
   );
   
   $selector = '#'.SERVICESTATE_ID_PREFIX.'-'.$id;

@@ -8,6 +8,7 @@
 define ('SERVICESTATE_ID_PREFIX','servicestate-item');
 
 define ('SERVICESTATE_OK','OK');
+define ('SERVICESTATE_WARN','WARNING');
 define ('SERVICESTATE_FAIL','FAILURE');
 define ('SERVICESTATE_NO_SUCH_SERVICE','nosuchservice');
 
