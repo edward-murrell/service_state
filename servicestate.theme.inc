@@ -64,5 +64,6 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
 
   if (empty($variables['state'])) {
     $variables['state'] = servicestate_query_callback($variables['service']);
+    $variables['state'] = $variables['state']['status']; // TODO: Change this!
   }
 }
