@@ -7,6 +7,10 @@
 
 define ('SERVICESTATE_ID_PREFIX','servicestate-item');
 
+define ('SERVICESTATE_OK','OK');
+define ('SERVICESTATE_FAIL','FAILURE');
+define ('SERVICESTATE_NO_SUCH_SERVICE','nosuchservice');
+
 /**
  * Implements hook_menu().
  */
@@ -85,6 +89,8 @@ function servicestate_dummy_check() {
   } else {
     $result['error']   = 'Service suffered an unknown error';
   }
+
+  return $result;
 }
 
 /*
