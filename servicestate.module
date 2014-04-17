@@ -137,8 +137,13 @@ function servicestate_query_callback($id) {
     $srv  = $services[$id];
   }
 
-  // TODO: Load file if needed here.
+  if (array_key_exists('file',$srv) && !empty($srv['file'])) {
+    include_once($srv['file']);
+  }
   $result = call_user_func_array($srv['callback'],$srv['arguments']);
+
+  // TODO: Some functions may only return a boolean, check for this
+  // and format the result accordingly.
 
   return $result;
 }
