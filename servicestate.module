@@ -165,7 +165,7 @@ function servicestate_servicestate_services() {
   $services = servicestate_dummy_services();
   $services['cron'] = array(
     'title'         => t('Cron'),
-    'description'   => t('Checks the SMSOS service is active..'),
+    'description'   => t('Checks when cron last ran.'),
     'callback'      => 'servicestate_cron_check',
     'arguments'     => array(),
     'file'          => 'servicestate.plugins.inc',
