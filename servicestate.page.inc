@@ -8,7 +8,9 @@
  * Implements hook_menu().
  */
 function servicestate_view_page() {
-  drupal_add_css(drupal_get_path('module', 'servicestate') . '/css/servicestate.css');
+  $path = drupal_get_path('module', 'servicestate');
+  drupal_add_css($path . '/css/servicestate.css');
+  drupal_add_js ($path . '/js/servicestate_page.css');
 
   $content = array();
 
