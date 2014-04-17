@@ -48,7 +48,7 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
     drupal_add_library('system', 'drupal.ajax');
 
     // TODO change link to update to code that automatically calls ajax on load
-    $variables['title'] = t('This is a test.');
+    $variables['title'] = $variables['data']['title'];
     $variables['state'] =
       l('Update',
         "servicestate/nojs/{$variables['service']}",
