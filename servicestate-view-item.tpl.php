@@ -1,8 +1,8 @@
-<div class="<?php print implode(' ', $variables['classes_array']); ?>" id="<?php print SERVICESTATE_ID_PREFIX.'-'.$service; ?>">
-  <div>
+<tr class="<?php print implode(' ', $variables['classes_array']); ?>" id="<?php print SERVICESTATE_ID_PREFIX.'-'.$service; ?>">
+  <td class="servicestate-table-title">
     <?php print $title; ?>
-  </div>
-  <div>
+  </td>
+  <td class="servicestate-table-state">
     <?php
       // TODO, consider cleaning this up
       if ($state['status'] == SERVICESTATE_OK) {
@@ -11,8 +11,8 @@
         print $state['error'];
       }
     ?>
-  </div>
-  <div>
+  </td>
+  <td class="servicestate-table-update">
     <?php print $button; ?>
-  </div>
-</div>
+  </td>
+</tr>

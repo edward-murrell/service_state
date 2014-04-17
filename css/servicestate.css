@@ -1,3 +1,7 @@
 .servicestate-view-table {
   border: black 1px solid;
 }
+
+.servicestate-view-item .servicestate-table-update {
+  float: right;
+}
