@@ -49,22 +49,21 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
 
     // TODO change link to update to code that automatically calls ajax on load
     $variables['title'] = $variables['data']['title'];
-    $variables['state'] =
-      l('Update',
-        "servicestate/nojs/{$variables['service']}",
-         array(
-          'attributes' => array(
-            'id' => 'servicestate-item-'.$variables['service'],
-            'class' => array('use-ajax'),
-        )
-      )
-    );
-    return;
+    $variables['state'] = '?'; // TODO : Change this to a spinner.
   }
+
+  $variables['button'] =
+    l('Update',
+      "servicestate/nojs/{$variables['service']}",
+       array(
+        'attributes' => array(
+          'id' => 'servicestate-item-'.$variables['service'],
+          'class' => array('use-ajax'),
+      )
+    )
+  );
 
   if (empty($variables['state'])) {
     $variables['state'] = servicestate_query_callback($variables['service']);
-    $variables['state'] = $variables['state']['status']; // TODO: Change this!
-    // TODO : Add output of actual error.
   }
 }

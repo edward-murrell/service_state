@@ -82,12 +82,12 @@ function servicestate_theme($existing, $type, $theme, $path) {
     'servicestate_view_item' => array(
       'template' => 'servicestate-view-item',
       'variables' => array(
+        'title'   => NULL,
         'service' => NULL,
         'data'    => NULL,
         'state'   => NULL,   // Pre rendered state
         'method'  => 'html', // Render on demand, or use ajax?
-        'title'  => NULL,
-        'state'  => NULL,
+        'button'  => NULL,
       ),
       'file' => 'servicestate.theme.inc',
     )

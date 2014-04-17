@@ -3,6 +3,16 @@
     <?php print $title; ?>
   </div>
   <div>
-    <?php print $state; ?>
+    <?php
+      // TODO, consider cleaning this up
+      if ($state['status'] == SERVICESTATE_OK) {
+        print "OK";
+      } else {
+        print $state['error'];
+      }
+    ?>
+  </div>
+  <div>
+    <?php print $button; ?>
   </div>
 </div>
