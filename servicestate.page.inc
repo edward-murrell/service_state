@@ -8,6 +8,8 @@
  * Implements hook_menu().
  */
 function servicestate_view_page() {
+  drupal_add_css(drupal_get_path('module', 'servicestate') . '/css/servicestate.css');
+
   $content = array();
 
   // Call from cache here

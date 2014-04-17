@@ -1,3 +1,3 @@
-<div>table start</div>
+<div class="<?php print implode(' ', $variables['classes_array']); ?>">
       <?php print $children; ?>
-<div>table end</div>
+</div>
