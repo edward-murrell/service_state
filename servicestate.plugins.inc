@@ -4,7 +4,36 @@
  * File of functions for querying other services.
  */
 
-// Memcache
+/*
+ * Custom cron check
+ * @param $timeout  - time in milliseconds before timing out connection to memcache
+ */
+function servicestate_memcache_check($timeout = 1500) {
+  $state = array();
+
+  // Check if memcache exists.
+  if (!module_exists('memcache')) {
+    watchdog('servicestate',t('Skipping service state check on memcache - memcache module is not enabled.'), array(), WATCHDOG_ERROR);    
+    $state['status']  = SERVICESTATE_NO_SUCH_SERVICE;
+    $state['error']   = t('Memcache module is not installed/enabled.');
+  } else {
+    // Replace this mess with a lock/set/get setting
+
+    list($memcache_host) = explode(':', array_shift(array_keys(variable_get('memcache_servers', array('127.0.0.1:11211' => 'default')))));
+
+    $memcache = new Memcache();
+
+    if ( $memcache->connect($memcache_host, 11211) ) {
+      $state['status']  = SERVICESTATE_OK;
+      $state['message'] = t('Memcache service is alive.');
+    } else {
+      $state['status']  = SERVICESTATE_FAIL;
+      $state['error']   = t('Failed to connecto to memcache service.');
+    }
+  }
+
+  return $state;
+}
 
 /*
  * Custom cron check

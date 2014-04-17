@@ -146,5 +146,17 @@ function servicestate_servicestate_services() {
     'weight'        => 0,
     'enabled'       => TRUE,
   );
+
+  $services['memcache'] = array(
+    'title'         => t('Memcache'),
+    'description'   => t('Checks the memcache daemon is up.'),
+    'callback'      => 'servicestate_memcache_check',
+    'arguments'     => array('error'),
+    'file'          => 'servicestate.plugins.inc',
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
   return $services;
 }
