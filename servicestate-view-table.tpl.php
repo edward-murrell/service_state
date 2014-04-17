@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-      <th class="servicestate-table-state">Server</th>
+      <th class="servicestate-table-state">Service</th>
       <th class="servicestate-table-state">State</th>
       <th class="servicestate-table-update"></th>
     </tr>
