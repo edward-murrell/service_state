@@ -23,8 +23,8 @@ function servicestate_menu() {
   $items['servicestate'] = array(
     'title'  => 'Service state',
     'page callback'     => 'servicestate_view_page',
-    'access callback'   => TRUE,
-    #'access arguments'  => array('view service state page'),
+    'access callback'   => 'user_access',
+    'access arguments'  => array('access servicestate page'),
     'type'              => MENU_NORMAL_ITEM,
     'file'              => 'servicestate.page.inc', // temporary
   );
@@ -32,8 +32,8 @@ function servicestate_menu() {
     'title'  => 'Service state',
     'page callback'     => 'servicestate_drupal_ajax',
     'page arguments'    => array(2),
-    'access callback'   => TRUE,
-    #'access arguments'  => array('view service state page'),
+    'access callback'   => 'user_access',
+    'access arguments'  => array('access servicestate page'),
     'type'              => MENU_CALLBACK,
     'file'              => 'servicestate.ajax.inc', // temporary
   );
@@ -41,14 +41,31 @@ function servicestate_menu() {
     'title'  => 'Service state',
     'page callback'     => 'servicestate_json_ajax',
     'page arguments'    => array(2),
-    'access callback'   => TRUE,
-    #'access arguments'  => array('view service state page'),
+    'access callback'   => 'user_access',
+    'access arguments'  => array('access servicestate api'),
     'type'              => MENU_CALLBACK,
     'file'              => 'servicestate.ajax.inc', // temporary
   );
 
   return $items;
 }
+
+/*
+ * Implements hook_permission
+ */
+function servicestate_permission() {
+ return array(
+    'access servicestate page' => array(
+      'title' => t('Access service state page'),
+      'description' => t('Allow users to see the Service State summary page'),
+    ),
+    'access servicestate api' => array(
+      'title' => t('Access to API checks'),
+      'description' => t('Allow users to access Service State via non-html API calls'),
+    ),
+  );
+}
+
 
 /*
  * Implementation of hook_theme().
