@@ -46,10 +46,6 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
   // If method is ajax
   if ($variables['method'] == 'ajax' && array_key_exists($variables['service'],$services)) {
     drupal_add_library('system', 'drupal.ajax');
-
-    // TODO change link to update to code that automatically calls ajax on load
-    $variables['title'] = $variables['data']['title'];
-    $variables['state'] = '?'; // TODO : Change this to a spinner.
   }
 
   $variables['button'] =
@@ -63,7 +59,9 @@ function servicestate_preprocess_servicestate_view_item(&$variables) {
     )
   );
 
-  if (empty($variables['state'])) {
+  if (empty($variables['state']) && $variables['method'] != 'ajax') {
     $variables['state'] = servicestate_query_callback($variables['service']);
   }
+
+  $variables['classes_array'][] = ''.strtolower($variables['state']['status']);
 }
