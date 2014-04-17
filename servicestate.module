@@ -126,5 +126,35 @@ function servicestate_theme($existing, $type, $theme, $path) {
  * Format callback for querying service.
  */
 function servicestate_query_callback($id) {
-  return 'OK';
+  $services = servicestate_get_services();
+  if (!array_key_exists($id,$services)) {
+    return array(
+      'status' => SERVICESTATE_NO_SUCH_SERVICE,
+      'error'  => 'This service does not exist',
+    );
+  } else {
+    $srv  = $services[$id];
+  }
+
+  // TODO: Load file if needed here.
+  $result = call_user_func_array($srv['callback'],$srv['arguments']);
+
+  return $result;
+}
+
+/*
+ * Get a list of all services.
+ */
+function servicestate_get_services() {
+  $services = array();
+  // TODO: Add cache here.
+  $services = module_invoke_all('servicestate_services');
+  return $services;
+}
+
+/*
+ * Implements hook_servicestate_services
+ */
+function servicestate_servicestate_services() {
+  return servicestate_dummy_services();
 }

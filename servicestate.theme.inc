@@ -28,7 +28,7 @@ function servicestate_preprocess_servicestate_view_table(&$variables) {
  */
 function servicestate_preprocess_servicestate_view_item(&$variables) {
   // TODO: Cache this.
-  $services = servicestate_dummy_services();
+  $services = servicestate_get_services();
 
   // Fill out the data variable if empty
   if (empty($variables['data'])) {

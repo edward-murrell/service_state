@@ -9,12 +9,12 @@
  * @param $id the machine name of the service.
  */
 function servicestate_drupal_ajax($id) {
-  $services = servicestate_dummy_services();
+  $services = servicestate_get_services();
   if (!array_key_exists($id,$services)) {  
     return '';
   } else {
     $srv  = $services[$id];
-    $data = servicestate_query_callback($id);
+    $data = servicestate_get_services($id);
   }
   $vars = array(
     'title' => $srv['title'],
