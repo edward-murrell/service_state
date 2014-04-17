@@ -51,13 +51,13 @@ function servicestate_dummy_check() {
   if ($nargs > 0) {
     $state = array_pop($args);
   } else {
-    $state = 'ok';
+    $state = SERVICESTATE_OK;
   }
   $result = array(
     'status' => strtoupper($state),
   );
 
-  if ($result['status'] == 'OK') {
+  if ($result['status'] == SERVICESTATE_OK) {
     $result['message'] = 'Service returns as expected';
   } else {
     $result['error']   = 'Service suffered an unknown error';
