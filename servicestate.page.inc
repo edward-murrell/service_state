@@ -12,13 +12,7 @@ function servicestate_view_page() {
 
   // Call from cache here
 
-  // call hook module here
-
   // Sort by group, weight, title
-
-  // output to call by ajax - somehow
-
-  $content['title'] = array('#type' => 'markup', '#markup' => 'This is dummy content');
 
   $content['table'] = array(
     '#theme' => 'servicestate_view_table',
