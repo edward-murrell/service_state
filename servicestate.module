@@ -51,31 +51,6 @@ function servicestate_menu() {
 }
 
 /*
- * This is a set of dummy check used to test the display page and
- * callback filters. It will eventually be deleted.
- */
-function servicestate_dummy_check() {
-  $args  = func_get_args();
-  $nargs = func_num_args();
-  if ($nargs > 0) {
-    $state = array_pop($args);
-  } else {
-    $state = SERVICESTATE_OK;
-  }
-  $result = array(
-    'status' => strtoupper($state),
-  );
-
-  if ($result['status'] == SERVICESTATE_OK) {
-    $result['message'] = 'Service returns as expected';
-  } else {
-    $result['error']   = 'Service suffered an unknown error';
-  }
-
-  return $result;
-}
-
-/*
  * Implementation of hook_theme().
  */
 function servicestate_theme($existing, $type, $theme, $path) {
