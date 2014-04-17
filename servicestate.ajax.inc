@@ -16,10 +16,6 @@ function servicestate_drupal_ajax($id) {
     $srv  = $services[$id];
     $data = servicestate_get_services($id);
   }
-  $vars = array(
-    'title' => $srv['title'],
-    'state' => SERVICESTATE_OK,
-  );
   
   $selector = '#'.SERVICESTATE_ID_PREFIX.'-'.$id;
   $item = array(
