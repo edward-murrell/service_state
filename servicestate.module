@@ -165,3 +165,47 @@ function servicestate_servicestate_services() {
 
   return $services;
 }
+
+/*
+ * Call a supplied function, wrap the result in a SERVICESTATE_MESSAGE,
+ * returns SERVICESTATE_WARNING if an empty string is returned.
+ * returns SERVICESTATE_FAIL if the function doesn't exist.
+ * @TODO: Add further arguments to function called
+ */
+function servicestate_message_function($function) {
+  $state = array();
+  if (!function_exists($function)) {
+    $state['status']  = SERVICESTATE_FAIL;
+    $state['error']   = t('Callback does not exist.');
+    return $state;
+  }
+  $result = call_user_func($function);
+  if (empty($result)) {
+    $state['status']  = SERVICESTATE_WARN;
+    $state['error']   = t('Service state empty.');
+    return $state;
+  }
+  else {
+    $state['status']  = SERVICESTATE_MESSAGE;
+    $state['message'] = $result;
+  }
+  return $state;
+}
+
+/*
+ * Find the supplied variable
+ * return a warning if the variable doesn't exist.
+ */
+function servicestate_message_variable($variable) {
+  $state = array();
+  $var = variable_get($variable);
+  if ($var === null) {
+    $state['status']  = SERVICESTATE_WARN;
+    $state['error']   = t('Variable !var not set.',array('!var' => $variable));
+  }
+  else {
+    $state['status']  = SERVICESTATE_MESSAGE;
+    $state['message'] = $var;
+  }
+  return $state;
+}
