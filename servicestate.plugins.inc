@@ -56,15 +56,15 @@ function servicestate_cron_check($warning = 15, $failure = 90) {
   }
   else if ($now-$failure > $last) {
     $state['status']  = SERVICESTATE_FAIL;
-    $state['error']   = t('Cron last run %n minutes ago.', array('%n' => $last_run));
+    $state['error']   = t('Cron last run !n minutes ago.', array('!n' => $last_run));
   }
   else if ($now-$warning > $last) {
     $state['status']  = SERVICESTATE_WARN;
-    $state['error']   = t('Cron last run %n minutes ago.', array('%n' => $last_run));
+    $state['error']   = t('Cron last run !n minutes ago.', array('!n' => $last_run));
   }
   else {
     $state['status']  = SERVICESTATE_OK;
-    $state['error']   = t('Cron last run %n minutes ago.', array('%n' => $last_run));
+    $state['error']   = t('Cron last run !n minutes ago.', array('!n' => $last_run));
   }
   return $state;
 }
