@@ -10,6 +10,7 @@ define ('SERVICESTATE_ID_PREFIX','servicestate-item');
 define ('SERVICESTATE_OK','OK');
 define ('SERVICESTATE_WARN','WARNING');
 define ('SERVICESTATE_FAIL','ERROR');
+define ('SERVICESTATE_MESSAGE','MESSAGE'); // Display a message, rather than a OK status
 define ('SERVICESTATE_NO_SUCH_SERVICE','nosuchservice');
 define ('SERVICESTATE_CHECK_DISABLED','DISABLED');
 define ('SERVICESTATE_INTERNAL_ERROR','INTERROR'); // File or callback could not be found.
