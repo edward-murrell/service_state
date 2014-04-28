@@ -10,7 +10,7 @@
 function servicestate_view_page() {
   $path = drupal_get_path('module', 'servicestate');
   drupal_add_css($path . '/css/servicestate.css');
-  drupal_add_js ($path . '/js/servicestate_page.css');
+  drupal_add_js ($path . '/js/servicestate_page.js');
 
   $content = array();
 
