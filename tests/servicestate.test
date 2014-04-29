@@ -96,15 +96,15 @@ class ServiceStateTestCase extends DrupalWebTestCase {
    */
   public function testRemovedCheck() {
     $this->drupalLogin($this->user);
-    $response = $this->drupalGetAJAX('servicestate/json/disabled');
-    file_put_contents('/tmp/output.txt',print_r($response,true));
+    $response = $this->drupalGetAJAX('servicestate/json/removed');
+    file_put_contents('/tmp/output.txt',print_r($response,true),FILE_APPEND);
     $this->assertEqual(
       $response['status'],
       SERVICESTATE_NO_SUCH_SERVICE
     );
     $this->assertEqual(
       $response['error'],
-      'Cron has never been run.'
+      'This service does not exist'
     );
   }
   
