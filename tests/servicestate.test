@@ -46,6 +46,9 @@ class ServiceStateTestCase extends DrupalWebTestCase {
     // Should 403 without proper auth here
     $this->assertResponse('403');
 
+    $this->drupalGet('servicestate/json/cron');
+    $this->assertResponse('403');
+
     // Login with user account with appropriate role and try again.
     $this->drupalLogin($this->user);
     $this->drupalGet('servicestate');
@@ -146,7 +149,6 @@ tests:
 servicestate_message_variable
 servicestate_message_function
 ordering
-access to json by anonymous
 test JSON response in message formats
 test html 
 */
