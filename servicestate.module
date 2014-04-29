@@ -127,14 +127,33 @@ function servicestate_query_callback($id) {
 
 /*
  * Get a list of all services.
+ * @param $show_disabled defaults to FALSE. If set to true, will include disabled services in list.
  */
-function servicestate_get_services() {
+function servicestate_get_services($show_disabled = FALSE) {
   $services = array();
-  // TODO: Add cache here.
   $services = module_invoke_all('servicestate_services');
+
+  foreach (module_implements('servicestate_alter') as $module) {
+    $function = $module . '_servicestate_alter';
+    $function($services);
+  }
+
   uasort($services,'drupal_sort_weight');
   uasort($services,'servicestate_sort_group');
 
+  if ($show_disabled == FALSE) {
+    $newserv = array();
+    foreach($services as $srv => $data) {
+      if (array_key_exists('enabled',$data) && $data['enabled'] == FALSE) {
+        // NOP
+      } else {
+        $newserv[$srv] = $data;
+      }
+    }
+    $services = $newserv;
+  }
+
+  // TODO: Add cache here.
   return $services;
 }
 
