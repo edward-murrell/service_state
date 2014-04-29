@@ -90,11 +90,26 @@ class ServiceStateTestCase extends DrupalWebTestCase {
       SERVICESTATE_FAIL
     );
   }
+
+  /*
+   * Check that disabled checks are not available
+   */
+  public function testRemovedCheck() {
+    $this->drupalLogin($this->user);
+    $response = $this->drupalGetAJAX('servicestate/json/disabled');
+    file_put_contents('/tmp/output.txt',print_r($response,true));
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_NO_SUCH_SERVICE
+    );
+    $this->assertEqual(
+      $response['error'],
+      'Cron has never been run.'
+    );
+  }
   
 }
 /*
-setup:
-disable memcache
 
 tests: 
 servicestate_message_variable
@@ -105,6 +120,5 @@ test JSON response in message formats
 test html 
 create bogus tests?
 test memcache built in test is removed
-check cron actually returns the results properly
 Check SERVICESTATE_NO_SUCH_SERVICE works properly
 */

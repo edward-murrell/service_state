@@ -11,18 +11,18 @@
 function servicestate_tests_servicestate_services() {
   $services = array();
 
-  $services['test1'] = array(
-    'title'         => t('1'),
-    'description'   => 'asd',
-    'callback'      => 'servicestate_cron_check',
+  $services['removed'] = array(
+    'title'         => t('failure'),
+    'description'   => 'This should never be run, it should be disabled by servicestate_tests_servicestate_alter.',
+    'callback'      => 'failure_function',
     'arguments'     => array(),
-    'file'          => 'servicestate.plugins.inc',
+    'file'          => null,
     'group'         => '',
     'weight'        => 0,
     'enabled'       => TRUE,
   );
 
-  $services['test2'] = array(
+  $services['broken'] = array(
     'title'         => t('Memcache'),
     'description'   => t('Checks the memcache daemon is up.'),
     'callback'      => 'servicestate_memcache_check',
@@ -35,4 +35,13 @@ function servicestate_tests_servicestate_services() {
 
   return $services;
   
+}
+
+/*
+ * Implements hook_servicestate_alter()
+ * Used to disable memcache.
+ */
+function servicestate_tests_servicestate_alter(&$services) {
+  $services['memcache']['enabled'] = FALSE;
+  $services['removed']['enabled'] = FALSE;
 }
