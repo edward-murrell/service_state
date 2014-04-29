@@ -46,7 +46,7 @@ function servicestate_json_ajax($id) {
   $services = servicestate_get_services();
   if (!array_key_exists($id,$services)) {
     $state = array(
-      'state' => SERVICESTATE_NO_SUCH_SERVICE,
+      'status' => SERVICESTATE_NO_SUCH_SERVICE,
       'error'  => 'This service does not exist',
     );
   } else {
