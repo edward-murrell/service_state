@@ -3,6 +3,14 @@
 /**
  * @file
  * Tests for servicestate module
+ * @TODO - add the following tests:
+ *  Test servicestate_message_function()
+ *  ordering of services
+ *  check JSON responses are of the following format:
+ *    status: OK|message, message: xyz
+ *      XOR
+ *    status: failure, error: xyz
+ *  Test ajax functionality
  */
 
 /**
@@ -175,12 +183,3 @@ class ServiceStateTestCase extends DrupalWebTestCase {
   }
 
 }
-/*
-
-tests: 
-servicestate_message_variable
-servicestate_message_function
-ordering
-test JSON response in message formats
-test html 
-*/
