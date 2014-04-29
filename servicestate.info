@@ -1,3 +1,4 @@
 name = "Service State"
 description = "Test and display the status off upstream services."
 core = 7.x
+files[] = tests/servicestate.test

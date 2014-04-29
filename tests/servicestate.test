@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Tests for servicestate module
+ */
+
+/**
+ * 
+ */
+class ServiceStateTestCase extends DrupalWebTestCase {
+
+  /**
+   * Setup our environment for this test.
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'servicestate',
+      'servicestate_tests'
+    ));
+    // User account with access priv
+    // do set up here
+  }
+
+  /**
+   * Provide info to drupal about this test.
+   *
+   * Displays on the testing page.
+   */
+  public static function getInfo() {
+    // Note: getInfo() string should not be translated.
+    return array(
+      'name'        => 'Servicestate functional tests',
+      'description' => 'Test accessing users search results.',
+      'group'       => 'Servicestate',
+    );
+  }
+
+  /**
+   * Test access profiles.
+   */
+  public function testAccess() {
+    $this->drupalGet('servicestate');
+    // Should 404 without proper auth here
+    
+    // Login with user account with priv here
+    $this->drupalGet('servicestate');
+    // assert 200
+  }
+  
+  public function testCron() {
+    // vset cron to a long time ago
+    // get json of cron
+    // 
+  }
+  
+}
+/*
+setup:
+disable memcache
+
+tests: 
+servicestate_message_variable
+servicestate_message_function
+ordering
+access to json by anonymous
+test JSON response in message formats
+test html 
+create bogus tests?
+test memcache built in test is removed
+check cron actually returns the results properly
+Check SERVICESTATE_NO_SUCH_SERVICE works properly
+*/

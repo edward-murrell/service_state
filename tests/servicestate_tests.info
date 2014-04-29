@@ -1,0 +1,4 @@
+name = "Service State Tests"
+description = "Submodule for testing Servicestate"
+core = 7.x
+dependencies[] = servicestate

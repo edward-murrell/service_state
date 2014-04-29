@@ -1,0 +1,38 @@
+<?php
+/**
+ * @file
+ * Creates 
+ */
+
+// Alter to turn off memcache
+
+// Create always x/y/z responses
+
+function servicestate_tests_servicestate_services() {
+  $services = array();
+
+  $services['test1'] = array(
+    'title'         => t('1'),
+    'description'   => 'asd',
+    'callback'      => 'servicestate_cron_check',
+    'arguments'     => array(),
+    'file'          => 'servicestate.plugins.inc',
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
+  $services['test2'] = array(
+    'title'         => t('Memcache'),
+    'description'   => t('Checks the memcache daemon is up.'),
+    'callback'      => 'servicestate_memcache_check',
+    'arguments'     => array(),
+    'file'          => 'servicestate.plugins.inc',
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
+  return $services;
+  
+}
