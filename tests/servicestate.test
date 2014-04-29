@@ -32,7 +32,7 @@ class ServiceStateTestCase extends DrupalWebTestCase {
     // Note: getInfo() string should not be translated.
     return array(
       'name'        => 'Servicestate functional tests',
-      'description' => 'Test accessing users search results.',
+      'description' => 'Test access and various responses states.',
       'group'       => 'Servicestate',
     );
   }
