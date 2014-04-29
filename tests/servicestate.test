@@ -142,6 +142,26 @@ class ServiceStateTestCase extends DrupalWebTestCase {
     );
   }
 
+  /*
+   * Test that servicestate_message_variable returns properly
+   */
+  public function testMessageVarCallback() {
+    $this->drupalLogin($this->user);
+    $rand = $this->randomString(17);
+    variable_set('serv_test_var',$rand);
+
+    $response = $this->drupalGetAJAX('servicestate/json/testvar');
+
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_MESSAGE
+    );
+    $this->assertEqual(
+      $response['message'],
+      $rand
+    );
+  }
+
 }
 /*
 

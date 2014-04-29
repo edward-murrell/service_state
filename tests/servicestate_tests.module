@@ -33,6 +33,17 @@ function servicestate_tests_servicestate_services() {
     'enabled'       => TRUE,
   );
 
+  $services['testvar'] = array(
+    'title'         => t('Returns test variable'),
+    'description'   => t('Returns the contents of serv_test_var via servicestate_message_variable callback.'),
+    'callback'      => 'servicestate_message_variable',
+    'arguments'     => array('serv_test_var'),
+    'file'          => null,
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
   return $services;
   
 }
