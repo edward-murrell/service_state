@@ -117,7 +117,14 @@ function servicestate_query_callback($id) {
   if (array_key_exists('file',$srv) && !empty($srv['file'])) {
     include_once($srv['file']);
   }
-  $result = call_user_func_array($srv['callback'],$srv['arguments']);
+  if (!function_exists($srv['callback'])) {
+    $result = array(
+      'status' => SERVICESTATE_INTERNAL_ERROR,
+      'error'  => t('This service check is not defined properly')
+    );
+  } else {
+      $result = call_user_func_array($srv['callback'],$srv['arguments']);
+  }
 
   // TODO: Some functions may only return a boolean, check for this
   // and format the result accordingly.
