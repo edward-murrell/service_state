@@ -9,6 +9,7 @@
  * 
  */
 class ServiceStateTestCase extends DrupalWebTestCase {
+  protected $user = null;
 
   /**
    * Setup our environment for this test.
@@ -18,8 +19,8 @@ class ServiceStateTestCase extends DrupalWebTestCase {
       'servicestate',
       'servicestate_tests'
     ));
-    // User account with access priv
-    // do set up here
+    $perms = array_keys(servicestate_permission());
+    $this->user = $this->drupalCreateUser($perms);
   }
 
   /**
@@ -41,17 +42,53 @@ class ServiceStateTestCase extends DrupalWebTestCase {
    */
   public function testAccess() {
     $this->drupalGet('servicestate');
-    // Should 404 without proper auth here
-    
-    // Login with user account with priv here
+
+    // Should 403 without proper auth here
+    $this->assertResponse('403');
+
+    // Login with user account with appropriate role and try again.
+    $this->drupalLogin($this->user);
     $this->drupalGet('servicestate');
-    // assert 200
+    $this->assertResponse('200');
   }
-  
+
   public function testCron() {
-    // vset cron to a long time ago
-    // get json of cron
-    // 
+    $this->drupalLogin($this->user);
+
+    // Check OK
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_OK
+    );
+
+    // Check never
+    variable_del('cron_last');
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_WARN
+    );
+    $this->assertEqual(
+      $response['error'],
+      'Cron has never been run.'
+    );
+
+    // Check warning
+    variable_set('cron_last',(time() - 1800));
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_WARN
+    );
+
+    // Check critical
+    variable_set('cron_last',(time() - 7200));
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_FAIL
+    );
   }
   
 }
