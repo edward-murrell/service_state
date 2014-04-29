@@ -123,6 +123,22 @@ class ServiceStateTestCase extends DrupalWebTestCase {
     );
   }
 
+  /*
+   * Check that the built in memcache module is turned off automagically when module is not loaded.
+   */
+  public function testMemcacheRemoved() {
+    $this->drupalLogin($this->user);
+    $response = $this->drupalGetAJAX('servicestate/json/memcache');
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_NO_SUCH_SERVICE
+    );
+    $this->assertEqual(
+      $response['error'],
+      'This service does not exist'
+    );
+  }
+
 }
 /*
 
@@ -133,6 +149,4 @@ ordering
 access to json by anonymous
 test JSON response in message formats
 test html 
-test memcache built in test is removed
-Check SERVICESTATE_NO_SUCH_SERVICE works properly
 */
