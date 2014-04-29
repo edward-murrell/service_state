@@ -107,6 +107,22 @@ class ServiceStateTestCase extends DrupalWebTestCase {
     );
   }
   
+  /*
+   * Check that a internally broken check returns cleanly.
+   */
+  public function testBrokenCheck() {
+    $this->drupalLogin($this->user);
+    $response = $this->drupalGetAJAX('servicestate/json/broken');
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_INTERNAL_ERROR
+    );
+    $this->assertEqual(
+      $response['error'],
+      'This service check is not defined properly'
+    );
+  }
+
 }
 /*
 
@@ -117,7 +133,6 @@ ordering
 access to json by anonymous
 test JSON response in message formats
 test html 
-create bogus tests?
 test memcache built in test is removed
 Check SERVICESTATE_NO_SUCH_SERVICE works properly
 */

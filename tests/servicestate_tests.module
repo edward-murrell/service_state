@@ -23,11 +23,11 @@ function servicestate_tests_servicestate_services() {
   );
 
   $services['broken'] = array(
-    'title'         => t('Memcache'),
+    'title'         => t('Broken service that calls an unreal function'),
     'description'   => t('Checks the memcache daemon is up.'),
-    'callback'      => 'servicestate_memcache_check',
+    'callback'      => 'failure_function',
     'arguments'     => array(),
-    'file'          => 'servicestate.plugins.inc',
+    'file'          => null,
     'group'         => '',
     'weight'        => 0,
     'enabled'       => TRUE,
