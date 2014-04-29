@@ -132,7 +132,19 @@ function servicestate_get_services() {
   $services = array();
   // TODO: Add cache here.
   $services = module_invoke_all('servicestate_services');
+  uasort($services,'drupal_sort_weight');
+  uasort($services,'servicestate_sort_group');
+
   return $services;
+}
+
+/*
+ * User sort function for sorting arrays by key 'group'.
+ */
+function servicestate_sort_group($arA, $arB) {
+  $groupA = (is_array($arA) && isset($arA['group'])) ? $arA['group'] : '';
+  $groupB = (is_array($arB) && isset($arB['group'])) ? $arB['group'] : '';
+  return strnatcmp($groupA,$groupB);
 }
 
 /*
