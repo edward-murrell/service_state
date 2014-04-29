@@ -160,6 +160,18 @@ class ServiceStateTestCase extends DrupalWebTestCase {
       $response['message'],
       $rand
     );
+
+
+    $response = $this->drupalGetAJAX('servicestate/json/testvar_broken');
+
+    $this->assertEqual(
+      $response['status'],
+      SERVICESTATE_WARN
+    );
+    $this->assertEqual(
+      $response['error'],
+      'Variable XYZ not set.'
+    );
   }
 
 }

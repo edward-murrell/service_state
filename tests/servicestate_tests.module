@@ -44,6 +44,17 @@ function servicestate_tests_servicestate_services() {
     'enabled'       => TRUE,
   );
 
+  $services['testvar_broken'] = array(
+    'title'         => t('Broken callback to servicestate_message_variable'),
+    'description'   => t('Attempts to returns the contents of a variable that does not exist.'),
+    'callback'      => 'servicestate_message_variable',
+    'arguments'     => array('XYZ'),
+    'file'          => null,
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
   return $services;
   
 }
