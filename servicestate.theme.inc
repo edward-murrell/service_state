@@ -25,6 +25,7 @@ function servicestate_preprocess_servicestate_view_table(&$variables) {
  *            will be used.
  *  method  - string of 'html' or 'ajax', html is not reccomended, as
  *            upstream services may time out.
+ * @TODO: Add setting to show messages attached to OK service state.
  */
 function servicestate_preprocess_servicestate_view_item(&$variables) {
   // TODO: Cache this.

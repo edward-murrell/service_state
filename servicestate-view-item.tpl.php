@@ -7,6 +7,8 @@
       // TODO, consider cleaning this up
       if ($state['status'] == SERVICESTATE_OK) {
         print "OK";
+        print ' - ';
+        print $state['message'];
       } else if ($state['status'] == SERVICESTATE_MESSAGE) {
         print $state['message'];
       } else {
