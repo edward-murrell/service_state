@@ -211,6 +211,17 @@ function servicestate_servicestate_services() {
     'enabled'       => TRUE,
   );
 
+  $services['dbendpoint'] = array(
+    'title'         => t('Database server'),
+    'description'   => t('Returns the database host.'),
+    'callback'      => 'servicestate_db_host',
+    'arguments'     => array(),
+    'file'          => 'servicestate.plugins.inc',
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
   return $services;
 }
 

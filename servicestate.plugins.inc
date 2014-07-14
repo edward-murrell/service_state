@@ -69,3 +69,12 @@ function servicestate_cron_check($warning = 15, $failure = 90) {
   return $state;
 }
 
+/*
+ * Return the default database host.
+ */
+function servicestate_db_host() {
+  $state['status']  = SERVICESTATE_MESSAGE;
+  $state['message']   = 'localhost';
+  return $state;
+}
+
