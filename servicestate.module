@@ -211,6 +211,17 @@ function servicestate_servicestate_services() {
     'enabled'       => TRUE,
   );
 
+  $services['memcache_list'] = array(
+    'title'         => t('Memcache servers'),
+    'description'   => t('Provides a list of memcache servers in the default group.'),
+    'callback'      => 'servicestate_memcache_list',
+    'arguments'     => array(),
+    'file'          => 'servicestate.plugins.inc',
+    'group'         => '',
+    'weight'        => 0,
+    'enabled'       => TRUE,
+  );
+
   $services['dbendpoint'] = array(
     'title'         => t('Database server'),
     'description'   => t('Returns the database host.'),

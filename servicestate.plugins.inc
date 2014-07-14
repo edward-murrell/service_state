@@ -47,6 +47,17 @@ function servicestate_memcache_check($timeout = 1500) {
 }
 
 /*
+ * Returns list of memcache servers.
+ */
+function servicestate_memcache_list() {
+  $memcache_servers = array_keys(variable_get('memcache_servers', array('127.0.0.1:11211' => 'default')));
+  return array(
+    'status'  => SERVICESTATE_MESSAGE,
+    'message' => implode(', ', $memcache_servers),
+  );
+}
+
+/*
  * Custom cron check
  * @param warning  - time in minutes to change message to warning.
  * @param critical - time to change message to failure.
