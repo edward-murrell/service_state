@@ -77,6 +77,9 @@ function servicestate_db_host() {
   if (isset($databases['default']['default']['host']) && !empty($databases['default']['default']['host'])) {
     $state['status']  = SERVICESTATE_MESSAGE;
     $state['message'] = $databases['default']['default']['host'];
+  } else {
+    $state['status']  = SERVICESTATE_MESSAGE;
+    $state['message'] = 'localhost';
   }
   return $state;
 }
