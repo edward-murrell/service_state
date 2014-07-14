@@ -34,9 +34,12 @@ function servicestate_memcache_check($timeout = 1500) {
     if (empty($dead_servers)) {
       $state['status']  = SERVICESTATE_OK;
       $state['message'] = t('Memcache service is alive.');
+    } else if (!empty($dead_servers) && !empty($live_servers)) {
+      $state['status']  = SERVICESTATE_WARN;
+      $state['error']   = t('Failed to connect to some memcache servers: '. implode(', ', $dead_servers));
     } else {
       $state['status']  = SERVICESTATE_FAIL;
-      $state['error']   = t('Failed to connect to memcache servers: '. implode(', ', $dead_servers));
+      $state['error']   = t('Failed to connect to all memcache servers: '. implode(', ', $dead_servers));
     }
   }
 
