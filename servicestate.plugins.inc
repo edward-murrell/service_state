@@ -73,8 +73,11 @@ function servicestate_cron_check($warning = 15, $failure = 90) {
  * Return the default database host.
  */
 function servicestate_db_host() {
-  $state['status']  = SERVICESTATE_MESSAGE;
-  $state['message']   = 'localhost';
+  global $databases;
+  if (isset($databases['default']['default']['host']) && !empty($databases['default']['default']['host'])) {
+    $state['status']  = SERVICESTATE_MESSAGE;
+    $state['message'] = $databases['default']['default']['host'];
+  }
   return $state;
 }
 
