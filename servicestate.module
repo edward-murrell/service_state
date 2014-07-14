@@ -113,7 +113,6 @@ function servicestate_query_callback($id) {
   }
 
   // TODO: Check if $srv[file] is an array, and load all files the string
-  // TODO: Check that file(s) actually load
   if (array_key_exists('file',$srv) && !empty($srv['file'])) {
     include_once($srv['file']);
   }
