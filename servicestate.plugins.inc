@@ -28,7 +28,7 @@ function servicestate_memcache_check($timeout = 1500) {
       $state['message'] = t('Memcache service is alive.');
     } else {
       $state['status']  = SERVICESTATE_FAIL;
-      $state['error']   = t('Failed to connecto to memcache service.');
+      $state['error']   = t('Failed to connect to memcache service.');
     }
   }
 
