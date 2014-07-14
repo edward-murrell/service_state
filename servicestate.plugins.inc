@@ -5,7 +5,7 @@
  */
 
 /*
- * Custom cron check
+ * Check if memcache servers are alive.
  * @param $timeout  - time in milliseconds before timing out connection to memcache
  */
 function servicestate_memcache_check($timeout = 1500) {
