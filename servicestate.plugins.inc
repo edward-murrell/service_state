@@ -17,18 +17,26 @@ function servicestate_memcache_check($timeout = 1500) {
     $state['status']  = SERVICESTATE_NO_SUCH_SERVICE;
     $state['error']   = t('Memcache module is not installed/enabled.');
   } else {
-    // Replace this mess with a lock/set/get setting
+    $live_servers = array();
+    $dead_servers = array();
 
-    list($memcache_host) = explode(':', array_shift(array_keys(variable_get('memcache_servers', array('127.0.0.1:11211' => 'default')))));
+    $memcache_servers = array_keys(variable_get('memcache_servers', array('127.0.0.1:11211' => 'default')));
+    foreach ($memcache_servers as $server) {
+      list($m_host,$m_port) = explode(':', $server);
+      $memcache = new Memcache();
+      if ( $memcache->connect($m_host, $m_port) ) {
+        $live_servers[] = $server;
+      } else {
+        $dead_servers[] = $server;
+      }
+    }
 
-    $memcache = new Memcache();
-
-    if ( $memcache->connect($memcache_host, 11211) ) {
+    if (empty($dead_servers)) {
       $state['status']  = SERVICESTATE_OK;
       $state['message'] = t('Memcache service is alive.');
     } else {
       $state['status']  = SERVICESTATE_FAIL;
-      $state['error']   = t('Failed to connect to memcache service.');
+      $state['error']   = t('Failed to connect to memcache servers: '. implode(', ', $dead_servers));
     }
   }
 
