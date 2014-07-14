@@ -201,7 +201,7 @@ function servicestate_servicestate_services() {
   );
 
   $services['memcache'] = array(
-    'title'         => t('Memcache'),
+    'title'         => t('Memcache status'),
     'description'   => t('Checks the memcache daemon is up.'),
     'callback'      => 'servicestate_memcache_check',
     'arguments'     => array(),
