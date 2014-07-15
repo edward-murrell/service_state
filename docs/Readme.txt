@@ -1,6 +1,20 @@
 ServiceState
 ------------
 
+States
+------
+The normal states are as follows:
+
+OK      - Everything is normal.
+WARN    - Attention is needed, but is not critical. eg; Low disk space.
+FAIL    - Something is broken. eg; Database does not respond.
+MESSAGE - Provides information, such as a label, environment.
+
+Special states:
+nosuchservice - This service does not exist.
+DISABLED      - The service exists, but is not enabled.
+INTERROR      - Internal error in the check system, such as a PHP error.
+
 Writing tests
 -------------
 Implement a hook_servicestate_services in your module.
@@ -39,3 +53,25 @@ function MYMODULE_servicestate_services() {
 * group         - Plain text group used to sort services.
 * weight        - Weight to sort services by, this is secondary to group.
 * enabled       - Indicates that the service is available and is checked.
+
+Writing callbacks
+-----------------
+
+Callbacks need to return an array in one of the following structures
+array(
+ 'status' => SERVICESTATE_OK | SERVICESTATE_MESSAGE,
+ 'message' => 'Messages goes here'
+)
+OR
+array(
+ 'status' => SERVICESTATE_WARN | SERVICESTATE_FAIL,
+ 'error'  => 'Error / warn status goes here'
+)
+
+Special functions
+-----------------
+
+These functions are useful for returning SERVICESTATE_MESSAGE data.
+
+function servicestate_message_function($function)
+function servicestate_message_variable($variable)
