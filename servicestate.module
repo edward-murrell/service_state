@@ -16,6 +16,14 @@ define ('SERVICESTATE_CHECK_DISABLED','DISABLED');
 define ('SERVICESTATE_INTERNAL_ERROR','INTERROR'); // File or callback could not be found.
 
 /**
+ * Defines for servicestate_encode_error variable.
+ * Used to determine if states returned via JSON or XML
+ * should return an error message as a 'message field.
+ */
+define ('SERVICESTATE_ERROR_FIELD_ERROR',  'error');
+define ('SERVICESTATE_ERROR_FIELD_MESSAGE','message');
+
+/**
  * Implements hook_menu().
  */
 function servicestate_menu() {
