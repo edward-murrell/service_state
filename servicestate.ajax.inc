@@ -53,6 +53,11 @@ function servicestate_json_ajax($id) {
     $srv  = $services[$id];
     $state = servicestate_query_callback($id);
   }
+  $error_key = variable_get('servicestate_encode_error', SERVICESTATE_ERROR_FIELD_ERROR);
+  if (array_key_exists('error',$state) && $error_key != 'error') {
+    $state[$error_key] = $state['error'];
+    unset($state['error']);
+  }
 
   print drupal_json_output($state);
   exit();
