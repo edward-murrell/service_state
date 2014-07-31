@@ -21,6 +21,16 @@ define ('SERVICESTATE_INTERNAL_ERROR','INTERROR'); // File or callback could not
 function servicestate_menu() {
   $items = array();
 
+  $items['admin/config/system/servicestate'] = array(
+    'title'             => 'Service state',
+    'description'       => 'Configure options for the Service State module',
+    'page callback'     => 'servicestate_admin_page',
+    'access callback'   => 'user_access',
+    'access arguments'  => array('administer servicestate'),
+    'type'              => MENU_NORMAL_ITEM,
+    'file'              => 'servicestate.admin.inc',
+  );
+
   $items['servicestate'] = array(
     'title'  => 'Service state',
     'page callback'     => 'servicestate_view_page',
@@ -56,6 +66,10 @@ function servicestate_menu() {
  */
 function servicestate_permission() {
  return array(
+   'administer servicestate' => array(
+     'title' => t('Administer service state'),
+     'description' => t('Set options for service state'),
+   ),
     'access servicestate page' => array(
       'title' => t('Access service state page'),
       'description' => t('Allow users to see the Service State summary page'),
