@@ -16,7 +16,7 @@ define ('SERVICESTATE_CHECK_DISABLED','DISABLED');
 define ('SERVICESTATE_INTERNAL_ERROR','INTERROR'); // File or callback could not be found.
 
 /**
- * Defines for servicestate_encode_error variable.
+ * Defines for servicestate_error_field variable.
  * Used to determine if states returned via JSON or XML
  * should return an error message as a 'message field.
  */

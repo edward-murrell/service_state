@@ -18,10 +18,10 @@ function servicestate_admin_page() {
  */
 function servicestate_admin_form($form, &$form_state) {
   $form = array();
-  $form['servicestate_encode_error'] = array(
+  $form['servicestate_error_field'] = array(
     '#type' => 'radios',
     '#title' => t('Error fields as messages'),
-    '#default_value' => variable_get('servicestate_encode_error', SERVICESTATE_ERROR_FIELD_ERROR),
+    '#default_value' => variable_get('servicestate_error_field', SERVICESTATE_ERROR_FIELD_ERROR),
     '#description' => t('How should error messages rendered when query via JSON or XML. The default is to have these as a field called \'error\', if set to message, then \'error\' fields will have the key \'message\' instead.'),
     '#required' => FALSE,
     '#options' => array(
