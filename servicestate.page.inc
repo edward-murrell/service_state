@@ -14,6 +14,19 @@ function servicestate_view_page() {
 
   $content = array();
 
+  if (user_access('administer servicestate')) {
+    $content['admin_link'] = array(
+      '#type' => 'link',
+      '#title' => t('Service state configuration'),
+      '#href' => 'admin/config/system/servicestate',
+      '#attributes' => array(
+        'class' => (
+          'admin-to-page-link'
+        )
+      ),
+    );
+  }
+
   // Call from cache here
 
   // Sort by group, weight, title

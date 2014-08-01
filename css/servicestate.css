@@ -5,3 +5,7 @@
 .servicestate-view-item .servicestate-table-update {
   float: right;
 }
+
+a.admin-to-page-link {
+  padding: 0.5em 0;
+}

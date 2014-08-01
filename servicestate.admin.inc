@@ -8,6 +8,7 @@
  * Main page for service state administration. Currently wraps a form.
  */
 function servicestate_admin_page() {
+  drupal_add_css($path . '/css/servicestate.css');
   return array(
     'admin_form' => drupal_get_form('servicestate_admin_form'),
   );
@@ -18,6 +19,16 @@ function servicestate_admin_page() {
  */
 function servicestate_admin_form($form, &$form_state) {
   $form = array();
+  $form['servicestate_page_link'] = array(
+    '#type'       => 'link',
+    '#title'      => t('Service state list'),
+    '#href'       => 'servicestate',
+    '#attributes' => array(
+      'class' => (
+          'admin-to-page-link'
+        )
+    ),
+  );
   $form['servicestate_error_field'] = array(
     '#type' => 'radios',
     '#title' => t('Error fields as messages'),
