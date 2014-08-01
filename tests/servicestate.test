@@ -182,4 +182,44 @@ class ServiceStateTestCase extends DrupalWebTestCase {
     );
   }
 
+  /*
+   * Test that setting servicestate_error_field works as expected
+   */
+  public function testChangingErrorField() {
+    $this->drupalLogin($this->user);
+    variable_set('servicestate_error_field',SERVICESTATE_ERROR_FIELD_ERROR);
+    variable_set('cron_last',(time() - 1800));
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual($response['status'], 'WARNING');
+    $this->assertTrue(array_key_exists('error', $response));
+    $this->assertFalse(array_key_exists('message', $response));
+    $this->assertEqual($response['error'], 'Cron last run 30 minutes ago.');
+
+
+    variable_set('servicestate_error_field',SERVICESTATE_ERROR_FIELD_MESSAGE);
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual($response['status'], 'WARNING');
+    $this->assertFalse(array_key_exists('error', $response));
+    $this->assertTrue(array_key_exists('message', $response));
+    $this->assertEqual($response['message'], 'Cron last run 30 minutes ago.');
+
+    // Repeat the above for error messages.
+    variable_set('servicestate_error_field',SERVICESTATE_ERROR_FIELD_ERROR);
+    variable_set('cron_last',(time() - 7200));
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual($response['status'], 'ERROR');
+    $this->assertTrue(array_key_exists('error', $response));
+    $this->assertFalse(array_key_exists('message', $response));
+    $this->assertEqual($response['error'], 'Cron last run 120 minutes ago.');
+
+    variable_set('servicestate_error_field',SERVICESTATE_ERROR_FIELD_MESSAGE);
+    $response = $this->drupalGetAJAX('servicestate/json/cron');
+    $this->assertEqual($response['status'], 'ERROR');
+    $this->assertFalse(array_key_exists('error', $response));
+    $this->assertTrue(array_key_exists('message', $response));
+    $this->assertEqual($response['message'], 'Cron last run 120 minutes ago.');
+
+    variable_del('servicestate_error_field');
+  }
+
 }
