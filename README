@@ -1,0 +1,37 @@
+What is it?
+===========
+Service state is a status page for Drupal. It is used to expose the state of
+the system. This might include configuration items, connectivity to any remote
+services, and general data about the health of the site.
+
+The status page is updated via ajax, so badly written plugins and misbehaving
+checks will not render the page unusable. Service status messages are also
+available via JSON. Status messages may be return a state of  Message, OK,
+Warning, or Failure.
+
+How do I use it
+===============
+The main page can be found at /servicestate
+
+Plugins are added via the hook system. In this way, various modules can
+add their own specific state hooks. For example, a module for connecting
+to a database or webservice could at a service state hook that indicates
+if the service is available.
+
+Out of the box, Service state exposes the main Drupal database endpoint,
+the last time cron was run, any memcache servers currently configured,
+and if said memcache servers are responding. 
+
+API
+===
+Service states are exposed via by implementing HOOK_servicestate_services().
+Further information can be found in the docs/Readme.txt file.
+
+Download
+========
+* Drupal.org: https://www.drupal.org/sandbox/ekm/2242893
+* Github: https://github.com/edward-murrell/service_state
+
+License
+=======
+GPL 2.0
