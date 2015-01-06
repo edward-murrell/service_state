@@ -8,7 +8,7 @@
  * Main page for service state administration. Currently wraps a form.
  */
 function servicestate_admin_page() {
-  drupal_add_css($path . '/css/servicestate.css');
+  drupal_add_css(__DIR__ . '/css/servicestate.css');
   return array(
     'admin_form' => drupal_get_form('servicestate_admin_form'),
   );
