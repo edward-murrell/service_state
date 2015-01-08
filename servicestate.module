@@ -153,9 +153,15 @@ function servicestate_query_callback($id) {
   return $result;
 }
 
-/*
- * Get a list of all services.
- * @param $show_disabled defaults to FALSE. If set to true, will include disabled services in list.
+/**
+ * Returns a list of all services enabled on the site.
+ *
+ * @param boolean $show_disabled
+ *   When set to TRUE, will included disabled services in the list.
+ *
+ * @return array
+ *   Returns a list of all services on the site, keyed by name, and sorted by
+ *   group, then weight.
  */
 function servicestate_get_services($show_disabled = FALSE) {
   $services = array();
