@@ -292,8 +292,20 @@ function servicestate_message_function($function) {
 }
 
 /*
- * Find the supplied variable
- * return a warning if the variable doesn't exist.
+ * Find the supplied variable as a status array.
+ *
+ * Retrieves the requested variable in argument variable, and sets it as the
+ *  'message' key in the returned array. The status key is returned as
+ *  SERVICESTATE_MESSAGE, and SERVICESTATE_WARN if the variable in $variable
+ *  does not exist.
+ *
+ * @param string $variable
+ *   Name of variable to return.
+ *
+ * @return array
+ *   Array contains keys of status and message. The key 'message' will be the
+ *   variable value. 'status' key is either SERVICESTATE_MESSAGE or
+ *   SERVICESTATE_WARN.
  */
 function servicestate_message_variable($variable) {
   $state = array();
