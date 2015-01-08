@@ -119,9 +119,19 @@ function servicestate_theme($existing, $type, $theme, $path) {
   );
 }
 
-/*
- * @param $id the machine name of the service.
- * Format callback for querying service.
+/**
+ * Retrieves a service state by machine name.
+ *
+ * Given the id of a service to check (ie; memcache_list), load the file
+ *  specified in the 'file' key, if set, and call the specified callback.
+ *  The resulting array will be returned.
+ *
+ * @param string $id
+ *  the machine name of the service. This should match with an array key in a
+ *  hook_servicestate_services() implementation.
+ *
+ * @return array
+ *   Returns an array with status and message keys.
  */
 function servicestate_query_callback($id) {
   $services = servicestate_get_services();
