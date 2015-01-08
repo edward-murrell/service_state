@@ -257,11 +257,19 @@ function servicestate_servicestate_services() {
   return $services;
 }
 
-/*
- * Call a supplied function, wrap the result in a SERVICESTATE_MESSAGE,
- * returns SERVICESTATE_WARNING if an empty string is returned.
- * returns SERVICESTATE_FAIL if the function doesn't exist.
- * @TODO: Add further arguments to function called
+/**
+ * Call a supplied function, returning as message with status SERVICESTATE_MESSAGE.
+ *
+ * @TODO: Add further arguments to function called.
+ *
+ * @param string $function
+ *   Callback function to call for message text.
+ *
+ * @return array
+ *   with keys of status and message. If the callback given in $function
+ *   does not exist, a SERVICESTATE_FAIL will be returned. If the $function
+ *   returns an empty string or value, a SERVICESTATE_WARN will be given in
+ *   status.
  */
 function servicestate_message_function($function) {
   $state = array();
